@@ -11,10 +11,11 @@ M.on_attach = function(client, bufnr)
   end
 
   vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, opts "Go to type definition")
+  vim.keymap.set("n", "gh", vim.lsp.buf.hover, opts "hover information")
 end
 
 local lspconfig = require "lspconfig"
-local servers = { "html", "cssls" }
+local servers = { "html", "cssls", "bashls" }
 
 -- lsps with default config
 for _, lsp in ipairs(servers) do

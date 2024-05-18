@@ -28,6 +28,7 @@ return {
         "ruff",
         "mypy",
         "rust-analyzer",
+        "bash-language-server",
       },
     },
   },
@@ -45,6 +46,7 @@ return {
         "typescript",
         "python",
         "rust",
+        "bash",
       },
     },
   },
@@ -92,4 +94,9 @@ return {
   },
 
   { "github/copilot.vim", lazy = false },
+
+  {
+    "folke/zen-mode.nvim",
+    lazy = false,
+  },
 }
