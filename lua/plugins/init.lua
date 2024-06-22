@@ -19,6 +19,8 @@ return {
     "williamboman/mason.nvim",
     opts = {
       ensure_installed = {
+        "clangd",
+        "clang-format",
         "lua-language-server",
         "stylua",
         "html-lsp",
@@ -29,6 +31,8 @@ return {
         "mypy",
         "rust-analyzer",
         "bash-language-server",
+        "typescript-language-server",
+        "eslint-lsp",
       },
     },
   },
@@ -37,6 +41,8 @@ return {
     "nvim-treesitter/nvim-treesitter",
     opts = {
       ensure_installed = {
+        "c",
+        "cpp",
         "vim",
         "lua",
         "vimdoc",
@@ -47,6 +53,16 @@ return {
         "python",
         "rust",
         "bash",
+      },
+
+      incremental_selection = {
+        enable = true,
+        keymaps = {
+          init_selection = "g;", -- set to `false` to disable one of the mappings
+          node_incremental = "g;",
+          scope_incremental = false,
+          node_decremental = "g,",
+        },
       },
     },
   },
@@ -73,6 +89,12 @@ return {
         },
       }
     end,
+  },
+
+  {
+    "pmizio/typescript-tools.nvim",
+    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    opts = {},
   },
 
   {
@@ -108,5 +130,16 @@ return {
   {
     "numToStr/Comment.nvim",
     lazy = false,
+  },
+
+  {
+    "kylechui/nvim-surround",
+    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    lazy = false,
+    config = function()
+      require("nvim-surround").setup {
+        -- Configuration here, or leave empty to use defaults
+      }
+    end,
   },
 }

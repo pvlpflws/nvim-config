@@ -2,7 +2,7 @@ require "nvchad.mappings"
 
 local map = vim.keymap.set
 
-map("i", "jk", "<ESC>")
+map({ "i", "v" }, "jk", "<ESC>")
 
 map({ "n", "i", "v" }, "<C-u>", "<C-u>zz")
 map({ "n", "i", "v" }, "<C-d>", "<C-d>zz")

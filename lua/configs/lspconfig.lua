@@ -15,7 +15,7 @@ M.on_attach = function(client, bufnr)
 end
 
 local lspconfig = require "lspconfig"
-local servers = { "html", "cssls", "bashls" }
+local servers = { "html", "cssls", "bashls", "tsserver" }
 
 -- lsps with default config
 for _, lsp in ipairs(servers) do
@@ -25,13 +25,6 @@ for _, lsp in ipairs(servers) do
     capabilities = M.capabilities,
   }
 end
-
--- typescript
-lspconfig.tsserver.setup {
-  on_attach = M.on_attach,
-  on_init = M.on_init,
-  capabilities = M.capabilities,
-}
 
 -- python
 lspconfig.pyright.setup {
@@ -55,6 +48,15 @@ lspconfig.ruff.setup {
   on_attach = M.on_attach,
   capabilities = M.capabilities,
   filetypes = { "python" },
+}
+
+lspconfig.clangd.setup {
+  on_attach = M.on_attach,
+  capabilities = M.capabilities,
+  cmd = {
+    "clangd",
+    "--offset-encoding=utf-16",
+  },
 }
 
 return M

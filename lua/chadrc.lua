@@ -5,7 +5,7 @@
 local M = {}
 
 M.ui = {
-	theme = "everforest",
+	theme = "nord",
     statusline = {
     separator_style = "block",
   },
