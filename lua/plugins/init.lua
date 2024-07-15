@@ -53,6 +53,11 @@ return {
         "python",
         "rust",
         "bash",
+        "haskell",
+      },
+
+      highlight = {
+        enable = true,
       },
 
       incremental_selection = {
@@ -99,6 +104,7 @@ return {
 
   {
     "christoomey/vim-tmux-navigator",
+    lazy = false,
     cmd = {
       "TmuxNavigateLeft",
       "TmuxNavigateDown",
@@ -140,6 +146,46 @@ return {
       require("nvim-surround").setup {
         -- Configuration here, or leave empty to use defaults
       }
+    end,
+  },
+
+  {
+    "pwntester/octo.nvim",
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim",
+      -- OR 'ibhagwan/fzf-lua',
+      "nvim-tree/nvim-web-devicons",
+    },
+    lazy = false,
+    config = function()
+      require("octo").setup {
+        enable_builtin = true,
+        suppress_missing_scope = {
+          projects_v2 = true,
+        },
+      }
+    end,
+    keys = {
+      { "<leader>O", "<cmd>Octo<cr>", desc = "Octo" },
+    },
+  },
+
+  { "nvim-tree/nvim-web-devicons" },
+
+  {
+    "tpope/vim-fugitive",
+    lazy = false,
+  },
+
+  {
+    "MeanderingProgrammer/markdown.nvim",
+    name = "render-markdown", -- Only needed if you have another plugin named markdown.nvim
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
+    dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" }, -- if you prefer nvim-web-devicons
+    config = function()
+      require("render-markdown").setup {}
     end,
   },
 }
