@@ -37,6 +37,8 @@ lspconfig.pyright.setup {
     },
     python = {
       analysis = {
+        autoSearchPaths = true,
+        useLibraryCodeForTypes = true,
         ignore = { "*" }, -- Using Ruff
         typeCheckingMode = "strict", -- Using mypy
       },

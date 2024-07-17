@@ -1,5 +1,83 @@
 return {
   {
+    "nvim-telescope/telescope.nvim",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    cmd = "Telescope",
+    opts = function()
+      return require "configs.telescope"
+    end,
+    config = function(_, opts)
+      local telescope = require "telescope"
+      telescope.setup(opts)
+
+      -- load extensions
+      for _, ext in ipairs(opts.extensions_list) do
+        telescope.load_extension(ext)
+      end
+    end,
+  },
+
+  {
+    "nvim-tree/nvim-tree.lua",
+    cmd = { "NvimTreeToggle", "NvimTreeFocus" },
+    opts = function()
+      return require "configs.nvimtree"
+    end,
+    config = function(_, opts)
+      require("nvim-tree").setup(opts)
+    end,
+  },
+
+  {
+    "mfussenegger/nvim-dap",
+  },
+  {
+    "nvim-neotest/nvim-nio",
+  },
+  {
+    "rcarriga/nvim-dap-ui",
+    dependencies = {
+      "mfussenegger/nvim-dap",
+      "nvim-neotest/nvim-nio",
+      "folke/neodev.nvim",
+    },
+    config = function()
+      local dap = require "dap"
+      local dapui = require "dapui"
+      dapui.setup()
+      dap.listeners.after.event_initialized["dapui_config"] = function()
+        dapui.open()
+      end
+      dap.listeners.before.event_terminated["dapui_config"] = function()
+        dapui.close()
+      end
+      dap.listeners.before.event_exited["dapui_config"] = function()
+        dapui.close()
+      end
+    end,
+  },
+  {
+    "mfussenegger/nvim-dap-python",
+    ft = "python",
+    dependencies = {
+      "mfussenegger/nvim-dap",
+      "rcarriga/nvim-dap-ui",
+      "nvim-neotest/nvim-nio",
+    },
+    config = function()
+      require("dap-python").setup "~/.local/share/nvim/mason/packages/debugpy/venv/bin/python"
+      require("dap-python").test_runner = "pytest"
+    end,
+  },
+  {
+    "folke/neodev.nvim",
+    config = function()
+      require("neodev").setup {
+        library = { plugins = { "nvim-dap-ui" }, types = true },
+      }
+    end,
+  },
+  {
     "stevearc/conform.nvim",
     -- event = 'BufWritePre', -- uncomment for format on save
     config = function()
@@ -29,6 +107,7 @@ return {
         "pyright",
         "ruff",
         "mypy",
+        "debugpy",
         "rust-analyzer",
         "bash-language-server",
         "typescript-language-server",
@@ -171,8 +250,6 @@ return {
     },
   },
 
-  { "nvim-tree/nvim-web-devicons" },
-
   {
     "tpope/vim-fugitive",
     lazy = false,
@@ -187,5 +264,13 @@ return {
     config = function()
       require("render-markdown").setup {}
     end,
+  },
+
+  { "MunifTanjim/nui.nvim" },
+
+  {
+    "VonHeikemen/fine-cmdline.nvim",
+    lazy = false,
+    dependencies = { "MunifTanjim/nui.nvim" },
   },
 }
