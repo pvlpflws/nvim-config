@@ -17,4 +17,8 @@ map({ "n", "i", "v" }, "zm", ":ZenMode<CR>", { desc = "Zen Mode" })
 
 map("n", "<leader>db", ":DapToggleBreakpoint<CR>", { desc = "Toggle Breakpoint" })
 map("n", "<leader>dpr", ":lua require('dap-python').test_method()<CR>", { desc = "Test Method" })
-map("n", "<CR>", "<cmd>FineCmdline<CR>", { desc = "Fine Cmdline" })
+
+map("n", "<leader>dv", ":DiffviewOpen<CR>", { desc = "Diffview Open" })
+map("n", "<leader>dvc", ":DiffviewClose<CR>", { desc = "Diffview Close" })
+
+

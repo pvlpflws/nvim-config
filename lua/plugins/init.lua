@@ -105,8 +105,6 @@ return {
         "css-lsp",
         "prettier",
         "pyright",
-        "ruff",
-        "mypy",
         "debugpy",
         "rust-analyzer",
         "bash-language-server",
@@ -268,9 +266,5 @@ return {
 
   { "MunifTanjim/nui.nvim" },
 
-  {
-    "VonHeikemen/fine-cmdline.nvim",
-    lazy = false,
-    dependencies = { "MunifTanjim/nui.nvim" },
-  },
+  { "sindrets/diffview.nvim", lazy = false },
 }
