@@ -15,7 +15,7 @@ M.on_attach = function(client, bufnr)
 end
 
 local lspconfig = require "lspconfig"
-local servers = { "html", "cssls", "bashls", "tsserver" }
+local servers = { "html", "cssls", "bashls", "ts_ls" }
 
 -- lsps with default config
 for _, lsp in ipairs(servers) do
@@ -39,7 +39,7 @@ lspconfig.pyright.setup {
       analysis = {
         autoSearchPaths = true,
         useLibraryCodeForTypes = true,
-        ignore = { "*" }, -- Using Ruff
+        -- ignore = { "*" }, -- Using Ruff
         typeCheckingMode = "strict", -- Using mypy
       },
     },
@@ -50,6 +50,7 @@ lspconfig.ruff.setup {
   on_attach = M.on_attach,
   capabilities = M.capabilities,
   filetypes = { "python" },
+  cmd = { "ruff", "server", "--config", "line-length=120" },
 }
 
 lspconfig.clangd.setup {

@@ -110,6 +110,7 @@ return {
         "bash-language-server",
         "typescript-language-server",
         "eslint-lsp",
+        "ruff",
       },
     },
   },
@@ -267,4 +268,23 @@ return {
   { "MunifTanjim/nui.nvim" },
 
   { "sindrets/diffview.nvim", lazy = false },
+
+  { "folke/todo-comments.nvim", lazy = false },
+
+  { "nvim-pack/nvim-spectre", lazy = false },
+
+  { "nvim-treesitter/nvim-treesitter-context", lazy = false },
+
+  {
+    "hedyhli/outline.nvim",
+    lazy = false,
+    config = function()
+      -- Example mapping to toggle outline
+      vim.keymap.set("n", "<leader>o", "<cmd>Outline<CR>", { desc = "Toggle Outline" })
+
+      require("outline").setup {
+        -- Your setup opts here (leave empty to use defaults)
+      }
+    end,
+  },
 }
